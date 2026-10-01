@@ -7,7 +7,7 @@
    Routes and their location points, including coordinates, time, altitude, speed, course, accuracy, and stationary state.
 
 3. **How does the app process the data?**  
-   It receives live location updates, converts them into route points, and groups them into a route.
+   SwiftData loads the stored route points, Core Location tracks the user’s current position, and ARKit displays directions that guide them along the recorded route.
 
 4. **What is the app’s source of truth?**  
    SwiftData is the source of truth for saved routes and route points.

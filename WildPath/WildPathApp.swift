@@ -1,4 +1,5 @@
 import SwiftUI
+import SwiftData
 
 @main
 struct WildPathApp: App
@@ -13,5 +14,6 @@ struct WildPathApp: App
         {
             ContentView()
         }
+        .modelContainer(for: [Route.self, RoutePoint.self])
     }
 }

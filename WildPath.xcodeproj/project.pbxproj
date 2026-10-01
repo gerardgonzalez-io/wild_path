@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		98727A74306E8092008CF12E /* RecordingControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98727A73306E8092008CF12E /* RecordingControlsView.swift */; };
+		98727A76306E8092008CF12E /* RecordingMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98727A75306E8092008CF12E /* RecordingMapView.swift */; };
+		98727A78306E8093008CF12E /* RecordingMetricView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98727A77306E8093008CF12E /* RecordingMetricView.swift */; };
+		98727ABE306E83E9008CF12E /* RecordingViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98727ABD306E83E9008CF12E /* RecordingViewViewModel.swift */; };
 		98CEE250306C659E00410B4C /* WildPathApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CEE24E306C659E00410B4C /* WildPathApp.swift */; };
 		98CEE251306C659E00410B4C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CEE24D306C659E00410B4C /* ContentView.swift */; };
 		98CEE252306C659E00410B4C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 98CEE24C306C659E00410B4C /* Assets.xcassets */; };
@@ -21,6 +25,11 @@
 
 /* Begin PBXFileReference section */
 		000000000000000000000120 /* WildPath.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WildPath.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		98727A73306E8092008CF12E /* RecordingControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingControlsView.swift; sourceTree = "<group>"; };
+		98727A75306E8092008CF12E /* RecordingMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingMapView.swift; sourceTree = "<group>"; };
+		98727A77306E8093008CF12E /* RecordingMetricView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingMetricView.swift; sourceTree = "<group>"; };
+		98727ABB306E8381008CF12E /* RecordingViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingViewViewModel.swift; sourceTree = "<group>"; };
+		98727ABD306E83E9008CF12E /* RecordingViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingViewViewModel.swift; sourceTree = "<group>"; };
 		98CEE24C306C659E00410B4C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		98CEE24D306C659E00410B4C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		98CEE24E306C659E00410B4C /* WildPathApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WildPathApp.swift; sourceTree = "<group>"; };
@@ -48,6 +57,7 @@
 			children = (
 				98CEE24F306C659E00410B4C /* WildPath */,
 				000000000000000000000020 /* Products */,
+				98727ABA306E8381008CF12E /* ViewModels */,
 			);
 			sourceTree = "<group>";
 		};
@@ -57,6 +67,41 @@
 				000000000000000000000120 /* WildPath.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		98727A71306E791A008CF12E /* RecordingViews */ = {
+			isa = PBXGroup;
+			children = (
+				98CEE2A3306D507400410B4C /* RecordingView.swift */,
+				98727A73306E8092008CF12E /* RecordingControlsView.swift */,
+				98727A75306E8092008CF12E /* RecordingMapView.swift */,
+				98727A77306E8093008CF12E /* RecordingMetricView.swift */,
+			);
+			path = RecordingViews;
+			sourceTree = "<group>";
+		};
+		98727A72306E792D008CF12E /* SavedRoutesViews */ = {
+			isa = PBXGroup;
+			children = (
+				98CEE2A5306D507400410B4C /* SavedRoutesView.swift */,
+			);
+			path = SavedRoutesViews;
+			sourceTree = "<group>";
+		};
+		98727AB9306E823A008CF12E /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				98727ABD306E83E9008CF12E /* RecordingViewViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		98727ABA306E8381008CF12E /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				98727ABB306E8381008CF12E /* RecordingViewViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		98CEE24F306C659E00410B4C /* WildPath */ = {
@@ -76,8 +121,8 @@
 		98CEE253306C65B000410B4C /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				98CEE2A5306D507400410B4C /* SavedRoutesView.swift */,
-				98CEE2A3306D507400410B4C /* RecordingView.swift */,
+				98727A71306E791A008CF12E /* RecordingViews */,
+				98727A72306E792D008CF12E /* SavedRoutesViews */,
 				98CEE24D306C659E00410B4C /* ContentView.swift */,
 			);
 			path = Views;
@@ -95,6 +140,7 @@
 		98CEE255306C65BE00410B4C /* Logic */ = {
 			isa = PBXGroup;
 			children = (
+				98727AB9306E823A008CF12E /* ViewModels */,
 				98CEE261306D4C4A00410B4C /* CoreLocation */,
 			);
 			path = Logic;
@@ -183,14 +229,18 @@
 		000000000000000120000000 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			files = (
+				98727A78306E8093008CF12E /* RecordingMetricView.swift in Sources */,
 				98CEE2A6306D507400410B4C /* SavedRoutesView.swift in Sources */,
 				98CEE259306C69FF00410B4C /* AppDelegate.swift in Sources */,
 				98CEE257306C676B00410B4C /* LocationsHandler.swift in Sources */,
 				98CEE25E306D4A2D00410B4C /* RoutePoint.swift in Sources */,
+				98727A74306E8092008CF12E /* RecordingControlsView.swift in Sources */,
 				98CEE2A4306D507400410B4C /* RecordingView.swift in Sources */,
 				98CEE250306C659E00410B4C /* WildPathApp.swift in Sources */,
+				98727A76306E8092008CF12E /* RecordingMapView.swift in Sources */,
 				98CEE25C306D4A2C00410B4C /* Route.swift in Sources */,
 				98CEE251306C659E00410B4C /* ContentView.swift in Sources */,
+				98727ABE306E83E9008CF12E /* RecordingViewViewModel.swift in Sources */,
 			);
 		};
 /* End PBXSourcesBuildPhase section */
