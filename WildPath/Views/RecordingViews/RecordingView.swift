@@ -19,7 +19,7 @@ struct RecordingView: View
                 .frame(maxHeight: .infinity)
                 .ignoresSafeArea(edges: .top)
 
-            RecordingMetricView(
+            MetricView(
                 distance: viewModel.distance,
                 duration: viewModel.duration,
                 pointCount: viewModel.pointCount

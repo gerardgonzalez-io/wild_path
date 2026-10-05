@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct RecordingMetricView: View
+struct MetricView: View
 {
     let distance: Double
     let duration: TimeInterval
@@ -18,10 +18,7 @@ struct RecordingMetricView: View
         }
         .padding()
     }
-}
 
-extension RecordingMetricView
-{
     private var distanceText: String
     {
         Measurement(value: distance, unit: UnitLength.meters)
@@ -50,7 +47,7 @@ extension RecordingMetricView
 
 #Preview
 {
-    RecordingMetricView(
+    MetricView(
         distance: 2_400,
         duration: 1_938,
         pointCount: 248
