@@ -1,7 +1,6 @@
 import CoreLocation
 import Observation
 import OSLog
-import SwiftUI
 import UserNotifications
 
 @MainActor
@@ -18,26 +17,10 @@ final class LocationsHandler
     private let notificationCenter = UNUserNotificationCenter.current()
     private let notificationContent: UNMutableNotificationContent
 
-    @ObservationIgnored
-    @AppStorage("liveUpdatesStarted")
-    private var storedUpdatesStarted = false
-
-    @ObservationIgnored
-    @AppStorage("BGActivitySessionStarted")
-    private var storedBackgroundUpdates = false
-
-    private(set) var updatesStarted = false
-    private(set) var backgroundUpdates = false
-
     private(set) var lastUpdate: CLLocationUpdate?
     private(set) var lastLocation = CLLocation()
     private(set) var count = 0
     private(set) var isStationary = false
-
-#if os(iOS) || os(watchOS)
-    @ObservationIgnored
-    private var backgroundActivitySession: CLBackgroundActivitySession?
-#endif
 
     @ObservationIgnored
     private var locationUpdatesTask: Task<Void, Never>?
@@ -48,9 +31,7 @@ final class LocationsHandler
         content.title = "Location updates inactive"
         content.body = "Can't receive location updates while not in the foreground"
         notificationContent = content
-        updatesStarted = storedUpdatesStarted
-        backgroundUpdates = storedBackgroundUpdates
-        
+
         Task
         {
             do
@@ -62,52 +43,6 @@ final class LocationsHandler
                 logger.error("Could not request notification authorization: \(error.localizedDescription)")
             }
         }
-
-        if updatesStarted
-        {
-            startLocationUpdates()
-        }
-
-        if backgroundUpdates
-        {
-            setBackgroundUpdatesEnabled(true)
-        }
-    }
-
-    func setLocationUpdatesEnabled(_ isEnabled: Bool)
-    {
-        updatesStarted = isEnabled
-        storedUpdatesStarted = isEnabled
-
-        if isEnabled
-        {
-            startLocationUpdates()
-        }
-        else
-        {
-            stopLocationUpdates()
-        }
-    }
-
-    func setBackgroundUpdatesEnabled(_ isEnabled: Bool)
-    {
-        backgroundUpdates = isEnabled
-        storedBackgroundUpdates = isEnabled
-
-#if os(iOS) || os(watchOS)
-        if isEnabled
-        {
-            if backgroundActivitySession == nil
-            {
-                backgroundActivitySession = CLBackgroundActivitySession()
-            }
-        }
-        else
-        {
-            backgroundActivitySession?.invalidate()
-            backgroundActivitySession = nil
-        }
-#endif
     }
 
     func startLocationUpdates()
@@ -135,7 +70,7 @@ final class LocationsHandler
             {
                 for try await update in CLLocationUpdate.liveUpdates()
                 {
-                    guard !Task.isCancelled, updatesStarted else
+                    guard !Task.isCancelled else
                     {
                         break
                     }
@@ -177,6 +112,5 @@ final class LocationsHandler
         logger.info("Stopping location updates")
         locationUpdatesTask?.cancel()
         locationUpdatesTask = nil
-        setBackgroundUpdatesEnabled(false)
     }
 }

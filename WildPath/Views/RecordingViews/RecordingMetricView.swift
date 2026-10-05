@@ -18,7 +18,10 @@ struct RecordingMetricView: View
         }
         .padding()
     }
+}
 
+extension RecordingMetricView
+{
     private var distanceText: String
     {
         Measurement(value: distance, unit: UnitLength.meters)

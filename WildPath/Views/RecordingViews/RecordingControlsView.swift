@@ -2,41 +2,71 @@ import SwiftUI
 
 struct RecordingControlsView: View
 {
+    let recordingState: RecordingState
+    let onStart: () -> Void
+    let onPause: () -> Void
+    let onResume: () -> Void
+    let onFinish: () -> Void
+
     var body: some View
     {
         HStack(spacing: 24)
         {
-            Button
+            switch recordingState
             {
-            } label:
-            {
-                Label("Start", systemImage: "record.circle")
-            }
-            .buttonStyle(.borderedProminent)
-            .tint(.green)
+            case .idle:
+                Button(action: onStart)
+                {
+                    Label("Start", systemImage: "record.circle")
+                }
+                .buttonStyle(.borderedProminent)
+                .tint(.green)
 
-            Button
-            {
-            } label:
-            {
-                Label("Pause", systemImage: "pause.fill")
-            }
-            .buttonStyle(.bordered)
+            case .recording:
+                Button(action: onPause)
+                {
+                    Label("Pause", systemImage: "pause.fill")
+                }
+                .buttonStyle(.bordered)
 
-            Button
-            {
-            } label:
-            {
-                Label("Stop", systemImage: "stop.fill")
+                finishButton
+
+            case .paused:
+                Button(action: onResume)
+                {
+                    Label("Resume", systemImage: "play.fill")
+                }
+                .buttonStyle(.borderedProminent)
+                .tint(.green)
+
+                finishButton
+
+            case .finished:
+                Label("Finished", systemImage: "checkmark.circle.fill")
+                    .foregroundStyle(.green)
             }
-            .buttonStyle(.borderedProminent)
-            .tint(.red)
         }
         .padding()
+    }
+
+    private var finishButton: some View
+    {
+        Button(action: onFinish)
+        {
+            Label("Finish", systemImage: "stop.fill")
+        }
+        .buttonStyle(.borderedProminent)
+        .tint(.red)
     }
 }
 
 #Preview
 {
-    RecordingControlsView()
+    RecordingControlsView(
+        recordingState: .recording,
+        onStart: {},
+        onPause: {},
+        onResume: {},
+        onFinish: {}
+    )
 }
