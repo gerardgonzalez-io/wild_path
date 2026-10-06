@@ -3,8 +3,13 @@ import SwiftUI
 
 struct SavedRoutesListView: View
 {
+    @Environment(\.modelContext) private var modelContext
+
     @Query(sort: \Route.startedAt, order: .reverse)
     private var routes: [Route]
+
+    @State private var routesPendingDeletion: [Route] = []
+    @State private var isShowingDeleteConfirmation = false
 
     var body: some View
     {
@@ -19,15 +24,52 @@ struct SavedRoutesListView: View
         }
         else
         {
-            List(routes)
-            { route in
-                NavigationLink(value: AppDestination.routeDetails(route))
-                {
-                    SavedRouteRow(route: route)
+            List
+            {
+                ForEach(routes)
+                { route in
+                    NavigationLink(value: AppDestination.routeDetails(route))
+                    {
+                        SavedRouteRow(route: route)
+                    }
                 }
+                .onDelete(perform: requestRouteDeletion)
             }
             .navigationTitle("Saved Routes")
+            .toolbar
+            {
+                EditButton()
+            }
+            .confirmationDialog(
+                "Delete Route?",
+                isPresented: $isShowingDeleteConfirmation,
+                titleVisibility: .visible
+            )
+            {
+                Button("Delete", role: .destructive, action: deletePendingRoutes)
+                Button("Cancel", role: .cancel) { }
+            }
+            message:
+            {
+                Text("This action cannot be undone.")
+            }
         }
+    }
+
+    private func requestRouteDeletion(at offsets: IndexSet)
+    {
+        routesPendingDeletion = offsets.map { routes[$0] }
+        isShowingDeleteConfirmation = true
+    }
+
+    private func deletePendingRoutes()
+    {
+        for route in routesPendingDeletion
+        {
+            modelContext.delete(route)
+        }
+
+        routesPendingDeletion.removeAll()
     }
 }
 
