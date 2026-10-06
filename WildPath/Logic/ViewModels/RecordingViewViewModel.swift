@@ -19,6 +19,7 @@ final class RecordingViewViewModel
     private(set) var distance: Double = 0
     private(set) var duration: TimeInterval = 0
     private(set) var pointCount: Int = 0
+    private(set) var routeCoordinates: [CLLocationCoordinate2D] = []
     private(set) var errorMessage: String?
 
     @ObservationIgnored
@@ -58,6 +59,7 @@ final class RecordingViewViewModel
 
         currentRoute = route
         lastRecordedLocation = nil
+        routeCoordinates = []
         accumulatedDuration = 0
         activeSegmentStartedAt = route.startedAt
         recordingState = .recording
@@ -171,6 +173,7 @@ final class RecordingViewViewModel
 
         route.points.append(point)
         modelContext.insert(point)
+        routeCoordinates.append(location.coordinate)
         lastRecordedLocation = location
         updateDuration(at: location.timestamp)
         updateDisplayedMetrics()

@@ -15,7 +15,7 @@ struct RecordingView: View
     {
         VStack(spacing: 0)
         {
-            RecordingMapView()
+            RecordingMapView(routeCoordinates: viewModel.routeCoordinates)
                 .frame(maxHeight: .infinity)
                 .ignoresSafeArea(edges: .top)
 
